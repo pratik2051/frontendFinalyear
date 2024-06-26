@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+react-hooks/exhaustive-deps
 
 # testing
 /coverage

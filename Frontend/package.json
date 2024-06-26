@@ -1,5 +1,5 @@
 {
-  "name": "inventory-management-app",
+  "name": "inventory-management systemjs app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.37.2",
+    "axios": "^1.7.2",
     "chart.js": "^4.2.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",

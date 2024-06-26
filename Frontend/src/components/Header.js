@@ -21,6 +21,7 @@ function classNames(...classes) {
 export default function Header() {
   const authContext = useContext(AuthContext);
   const localStorageData = JSON.parse(localStorage.getItem("user"));
+  
   return (
     <>
       <div className="min-h-full">
@@ -30,16 +31,16 @@ export default function Header() {
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <div className="flex justify-center items-center gap-2">
-                        <img
-                          className="h-8 w-8"
-                          src={require("../assets/logo.png")}
-                          alt="Inventory Management System"
-                        />
-                        <span className="font-bold text-white italic">
-                          Inventory Management
-                        </span>
+                    <div className="flex-shrink-0 flex items-center gap-2">
+                      <img
+                        className="h-8 w-8"
+                        src={require("../assets/logo.png")}
+                        alt="Inventory Management System"
+                      />
+                      <div className="text-center">
+                      <span className="text-white font-bold text-lg p-4 rounded-lg shadow-md">
+  Welcome to College Inventory Management Software
+</span>
                       </div>
                     </div>
                   </div>
@@ -102,15 +103,9 @@ export default function Header() {
                     <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon
-                          className="block h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon
-                          className="block h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                       )}
                     </Disclosure.Button>
                   </div>
@@ -124,11 +119,8 @@ export default function Header() {
                       <Disclosure.Button
                         key={item.name}
                         as="a"
-                        // href={item.href}
                         className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          item.current ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "block rounded-md px-3 py-2 text-base font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}
@@ -149,9 +141,7 @@ export default function Header() {
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {localStorageData.firstName +
-                          " " +
-                          localStorageData.lastName}
+                        {localStorageData.firstName + " " + localStorageData.lastName}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
                         {localStorageData.email}

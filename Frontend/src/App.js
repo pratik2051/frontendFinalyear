@@ -1,20 +1,30 @@
 import React from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Authen from "./pages/Authen";
+import ForgotPassword from "./pages/Forgotpassword";
 import Dashboard from "./pages/Dashboard";
 import "./index.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route  } from "react-router-dom";
 import Layout from "./components/Layout";
 import Inventory from "./pages/Inventory";
 import NoPageFound from "./pages/NoPageFound";
 import AuthContext from "./AuthContext";
-import ProtectedWrapper from "./ProtectedWrapper";
-import { useEffect, useState } from "react";
-import Store from "./pages/Store";
-import Sales from "./pages/Sales";
-import PurchaseDetails from "./pages/PurchaseDetails";
 
-const App = () => {
+// import ProtectedWrapper from "./ProtectedWrapper";
+import { useEffect, useState } from "react";
+
+import InventoryCheck from "./pages/InventoryCheck";
+import Supplier from "./pages/Supplier";
+import Department from "./pages/Department";
+import User from "./pages/User";
+import Transaction from "./pages/Transaction";
+import PurchaseOrder from "./pages/PurchaseOrder";
+import PurchaseOrderItem from "./pages/PurchaseOrderItem";
+import InventoryCheckItem from "./pages/InventoryCheckItem";
+import Category from "./pages/Category";
+ 
+  const App = () => {
   const [user, setUser] = useState("");
   const [loader, setLoader] = useState(true);
   let myLoginUser = JSON.parse(localStorage.getItem("user"));
@@ -30,6 +40,7 @@ const App = () => {
       setLoader(false);
     }
   }, [myLoginUser]);
+
 
   const signin = (newUser, callback) => {
     setUser(newUser);
@@ -63,19 +74,27 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/authen" element={<Authen />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route
             path="/"
             element={
-              <ProtectedWrapper>
+             // <ProtectedWrapper>
                 <Layout />
-              </ProtectedWrapper>
+             // </ProtectedWrapper>
             }
           >
             <Route index element={<Dashboard />} />
             <Route path="/inventory" element={<Inventory />} />
-            <Route path="/purchase-details" element={<PurchaseDetails />} />
-            <Route path="/sales" element={<Sales />} />
-            <Route path="/manage-store" element={<Store />} />
+            <Route path="/Supplier" element={<Supplier />} />
+            <Route path="/department" element={<Department />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/transaction" element={<Transaction />} />
+            <Route path="/purchase-order" element={<PurchaseOrder />} />
+            <Route path="/purchase-order-item" element={<PurchaseOrderItem />} />
+            <Route path="/inventory-check-item" element={<InventoryCheckItem />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/inventory-check" element={<InventoryCheck />} />
           </Route>
           <Route path="*" element={<NoPageFound />} />
         </Routes>
@@ -85,3 +104,4 @@ const App = () => {
 };
 
 export default App;
+

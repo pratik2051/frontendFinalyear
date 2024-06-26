@@ -34,36 +34,95 @@ function SideMenu() {
           </details>
 
           <Link
-            to="/purchase-details"
+            to="/supplier"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="store-icon"
+              src={require("../assets/supplier-icon.png")}
+            />
+            <span className="text-sm font-medium"> Supplier</span>
+          </Link>
+          <Link
+            to="/Department"
             className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
           >
             <img
               alt="purchase-icon"
-              src={require("../assets/supplier-icon.png")}
+              src={require("../assets/department-icon.png")}
             />
-            <span className="text-sm font-medium"> Purchase Details</span>
+            <span className="text-sm font-medium">  Department</span>
           </Link>
           <Link
-            to="/sales"
+            to="/User"
             className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
           >
-            <img alt="sale-icon" src={require("../assets/supplier-icon.png")} />
-            <span className="text-sm font-medium"> Sales</span>
+            <img
+              alt="purchase-icon"
+              src={require("../assets/user-icon.png")}
+            />
+            <span className="text-sm font-medium">  User</span>
           </Link>
-
-          <details className="group [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-              <Link to="/manage-store">
-                <div className="flex items-center gap-2">
-                  <img
-                    alt="store-icon"
-                    src={require("../assets/order-icon.png")}
-                  />
-                  <span className="text-sm font-medium"> Manage Store </span>
-                </div>
-              </Link>
-            </summary>
-          </details>
+          <Link
+            to="/Transaction"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="purchase-icon"
+              src={require("../assets/transaction-icon.png")}
+            />
+            <span className="text-sm font-medium">  Transaction</span>
+          </Link>
+          <Link
+            to="/purchase-order"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="purchase-icon"
+              src={require("../assets/order-icon.png")}
+            />
+            <span className="text-sm font-medium">  Purchase Order</span>
+          </Link>
+          <Link
+            to="/purchase-order-item"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="purchase-icon"
+              src={require("../assets/order-icon.png")}
+            />
+            <span className="text-sm font-medium">  Purchase Order Item</span>
+          </Link>
+          <Link
+            to="/inventory-check"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="purchase-icon"
+              src={require("../assets/inventorycheck-icon.png")}
+            />
+            <span className="text-sm font-medium">  InventoryCheck</span>
+          </Link>
+          <Link
+            to="/inventory-check-item"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="purchase-icon"
+              src={require("../assets/inventorycheck-icon.png")}
+            />
+            <span className="text-sm font-medium">  InventoryCheckItem</span>
+          </Link>
+          <Link
+            to="/category"
+            className="flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <img
+              alt="purchase-icon"
+              src={require("../assets/reports-icon.png")}
+            />
+            <span className="text-sm font-medium">  Categories</span>
+          </Link>
         </nav>
       </div>
 

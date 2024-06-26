@@ -1,7 +1,7 @@
-// import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import AuthContext from "../AuthContext";
+import axios from "axios";
 
 function Login() {
   const [form, setForm] = useState({
@@ -12,57 +12,36 @@ function Login() {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-
   const handleInputChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const authCheck = () => {
-    setTimeout(() => {
-      fetch("http://localhost:4000/api/login")
-        .then((response) => response.json())
-        .then((data) => {
-          alert("Successfully Login");
-          localStorage.setItem("user", JSON.stringify(data));
-          authContext.signin(data._id, () => {
-            navigate("/");
-          });
-        })
-        .catch((err) => {
-          alert("Wrong credentials, Try again")
-          console.log(err);
-        });
-    }, 3000);
-  };
-
-  const loginUser = (e) => {
-    // Cannot send empty data
-    if (form.email === "" || form.password === "") {
-      alert("To login user, enter details to proceed...");
-    } else {
-      fetch("http://localhost:4000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(form),
-      })
-        .then((result) => {
-          console.log("User login", result);
-        })
-        .catch((error) => {
-          console.log("Something went wrong ", error);
-        });
-    }
-    authCheck();
-  };
-
-
-  const handleSubmit = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/auth/login", form);
+      const data = response.data;
+      console.log("abc",data);
+      
+      alert("Successfully logged in");
+      localStorage.setItem("user",JSON.stringify(data.accessToken));
+      navigate("/inventory");
+      authContext.signin(data._id, () => {
+       
+      });
+
+    } catch (error) {
+      alert("Wrong credentials, please try again");
+      console.error("Login error:", error);
+    }
   };
 
-  
+  const onSubmit=async(e) => {
+    e.preventDefault();
+    await axios.put(`http://localhost:8080/api/v1/auth/login`);
+    navigate("/");
+}
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 h-screen  items-center place-items-center">
@@ -77,19 +56,11 @@ function Login() {
               alt="Your Company"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Signin to your account
+              Sign in to your account
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or
-              <span
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                start your 14-day free trial
-              </span>
-            </p>
+          
           </div>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            {/* <input type="hidden" name="remember" defaultValue="true" /> */}
+          <form className="mt-8 space-y-6" onSubmit={loginUser}>
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label htmlFor="email-address" className="sr-only">
@@ -142,10 +113,8 @@ function Login() {
               </div>
 
               <div className="text-sm">
-                <span
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot your password?
+                <span className="font-medium text-indigo-600 hover:text-indigo-500">
+                <Link to="/">Forgot password</Link>
                 </span>
               </div>
             </div>
@@ -154,23 +123,14 @@ function Login() {
               <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={loginUser}
               >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  {/* <LockClosedIcon
-                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                    aria-hidden="true"
-                  /> */}
-                </span>
                 Sign in
               </button>
               <p className="mt-2 text-center text-sm text-gray-600">
                 Or{" "}
-                <span
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Don't Have an Account, Please{" "}
-                  <Link to="/register"> Register now </Link>
+                <span className="font-medium text-indigo-600 hover:text-indigo-500">
+                  Don't have an account?{" "}
+                  <Link to="/register">Register now</Link>
                 </span>
               </p>
             </div>
