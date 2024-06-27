@@ -18,10 +18,10 @@ function Inventory() {
   console.log(authContext);
   console.log('====================================');
 
-  // Fetching Data of All Products
+  // Fetching Data of All Items
   const fetchProductsData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/getproducts`, {
+      const response = await axios.get(`http://localhost:8080/api/v1/item/getall`, {
         params: {
           user: authContext.user
         }
@@ -35,7 +35,7 @@ function Inventory() {
   // Fetching Data of Search Products
   const fetchSearchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/getproducts`, {
+      const response = await axios.get(`http://localhost:8080/api/v1/item/getbyid/{id}`, {
         params: {
           search: searchTerm
         }
@@ -49,7 +49,7 @@ function Inventory() {
   // Fetching all stores data
   const fetchSalesData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/getstores`, {
+      const response = await axios.get(`http://localhost:8080/api/v1/item/getall`, {
         params: {
           user: authContext.user
         }
@@ -75,7 +75,7 @@ function Inventory() {
   // Delete item
   const deleteItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/v1/delete/${id}`);
+      await axios.delete(`http://localhost:8080/api/v1/item/delbyid{id}`);
       setUpdatePage(!updatePage);
     } catch (error) {
       console.log(error);
