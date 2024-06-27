@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import axios from "axios";
 import AuthContext from "../AuthContext";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
 export const data = {
   labels: ["furniture", "electronic equipment", "machinery equipment","library assets","whiteboard"],
   datasets: [
@@ -33,7 +35,7 @@ export const data = {
 };
 
 function Dashboard() {
-  const [saleAmount, setSaleAmount] = useState("");
+  const [TransactionAmount, setTransactionAmount] = useState("");
   const [purchaseAmount, setPurchaseAmount] = useState("");
   const [stores, setStores] = useState([]);
   const [products, setProducts] = useState([]);
@@ -84,7 +86,7 @@ function Dashboard() {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    fetchTotalSaleAmount();
+    fetchTotalTransactionAmount();
     fetchTotalPurchaseAmount();
     fetchStoresData();
     fetchProductsData();
@@ -92,44 +94,38 @@ function Dashboard() {
   }, []);
 
   // Fetching total sales amount
-  const fetchTotalSaleAmount = () => {
-    fetch(
-      `http://localhost:4000/api/sales/get/${authContext.user}/totalsaleamount`
-    )
-      .then((response) => response.json())
-      .then((datas) => setSaleAmount(datas.totalSaleAmount));
+  const fetchTotalTransactionAmount = () => {
+    axios.get('http://localhost:8080/api/v1/auth/transaction/alltransactions')
+      .then((response) => setTransactionAmount(response.data.totalTransactionAmount))
+      .catch((error) => console.error(error));
   };
 
   // Fetching total purchase amount
   const fetchTotalPurchaseAmount = () => {
-    fetch(
-      `http://localhost:4000/api/purchase/get/${authContext.user}/totalpurchaseamount`
-    )
-      .then((response) => response.json())
-      .then((datas) => setPurchaseAmount(datas.totalPurchaseAmount));
+    axios.get(`http://localhost:8080/api/purchase/get/${authContext.user}/totalpurchaseamount`)
+      .then((response) => setPurchaseAmount(response.data.totalPurchaseAmount))
+      .catch((error) => console.error(error));
   };
 
   // Fetching all stores data
   const fetchStoresData = () => {
-    fetch(`http://localhost:4000/api/store/get/${authContext.user}`)
-      .then((response) => response.json())
-      .then((datas) => setStores(datas));
+    axios.get(`http://localhost:4000/api/store/get/${authContext.user}`)
+      .then((response) => setStores(response.data))
+      .catch((error) => console.error(error));
   };
 
   // Fetching Data of All Products
   const fetchProductsData = () => {
-    fetch(`http://localhost:4000/api/product/get/${authContext.user}`)
-      .then((response) => response.json())
-      .then((datas) => setProducts(datas))
-      .catch((err) => console.log(err));
+    axios.get(`http://localhost:4000/api/product/get/${authContext.user}`)
+      .then((response) => setProducts(response.data))
+      .catch((error) => console.error(error));
   };
 
   // Fetching Monthly Sales
   const fetchMonthlySalesData = () => {
-    fetch(`http://localhost:4000/api/sales/getmonthly`)
-      .then((response) => response.json())
-      .then((datas) => updateChartData(datas.salesAmount))
-      .catch((err) => console.log(err));
+    axios.get('http://localhost:4000/api/sales/getmonthly')
+      .then((response) => updateChartData(response.data.salesAmount))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -137,7 +133,7 @@ function Dashboard() {
       <div className="grid grid-cols-1 col-span-12 lg:col-span-10 gap-6 md:grid-cols-3 lg:grid-cols-4  p-4 ">
         <article className="flex flex-col gap-4 rounded-lg border  border-gray-100 bg-white p-6  ">
           <div className="inline-flex gap-2 self-end rounded bg-green-100 p-1 text-green-600">
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
               fill="none"
@@ -150,22 +146,22 @@ function Dashboard() {
                 strokeWidth="2"
                 d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
               />
-            </svg>
+            </svg> */}
 
-            <span className="text-xs font-medium"> 67.81% </span>
+            {/* <span className="text-xs font-medium"> 67.81% </span> */}
           </div>
 
           <div>
             <strong className="block text-sm font-medium text-gray-500">
-              Sales
+              Transactions
             </strong>
 
             <p>
               <span className="text-2xl font-medium text-gray-900">
-                ${saleAmount}
+                {TransactionAmount}
               </span>
 
-              <span className="text-xs text-gray-500"> from $240.94 </span>
+              {/* <span className="text-xs text-gray-500"> from $240.94 </span> */}
             </p>
           </div>
         </article>
@@ -187,7 +183,7 @@ function Dashboard() {
               />
             </svg>
 
-            <span className="text-xs font-medium"> 67.81% </span>
+            {/* <span className="text-xs font-medium"> 67.81% </span> */}
           </div>
 
           <div>
@@ -201,7 +197,7 @@ function Dashboard() {
                 ${purchaseAmount}{" "}
               </span>
 
-              <span className="text-xs text-gray-500"> from $404.32 </span>
+              {/* <span className="text-xs text-gray-500"> from $404.32 </span> */}
             </p>
           </div>
         </article>
@@ -222,7 +218,7 @@ function Dashboard() {
               />
             </svg>
 
-            <span className="text-xs font-medium"> 67.81% </span>
+            {/* <span className="text-xs font-medium"> 67.81% </span> */}
           </div>
 
           <div>
@@ -257,7 +253,7 @@ function Dashboard() {
               />
             </svg>
 
-            <span className="text-xs font-medium"> 67.81% </span>
+            {/* <span className="text-xs font-medium"> 67.81% </span> */}
           </div>
 
           <div>

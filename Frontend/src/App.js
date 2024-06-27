@@ -10,6 +10,8 @@ import Layout from "./components/Layout";
 import Inventory from "./pages/Inventory";
 import NoPageFound from "./pages/NoPageFound";
 import AuthContext from "./AuthContext";
+import Authen1 from "./pages/Authen1";
+import Reset from "./pages/Reset";
 
 // import ProtectedWrapper from "./ProtectedWrapper";
 import { useEffect, useState } from "react";
@@ -75,7 +77,9 @@ import Category from "./pages/Category";
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/authen" element={<Authen />} />
+          <Route path="/authen1" element={<Authen1 />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/reset" element={<Reset />} />
           <Route
             path="/"
             element={

@@ -23,7 +23,7 @@ export default function AddProduct({
   };
 
   const addProduct = () => {
-    fetch("http://localhost:4000/api/product/add", {
+    fetch("http://localhost:8080/api/v1/auth/item", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -71,7 +71,7 @@ export default function AddProduct({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
                       <PlusIcon
@@ -82,7 +82,7 @@ export default function AddProduct({
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left ">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-semibold leading-6 text-gray-900 "
+                        className="text-lg font-semibold leading-6 text-red-900 "
                       >
                         Add Product
                       </Dialog.Title>
@@ -90,40 +90,40 @@ export default function AddProduct({
                         <div className="grid gap-4 mb-4 sm:grid-cols-2">
                           <div>
                             <label
-                              htmlFor="name"
+                              htmlFor="itemname"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
                               Name
                             </label>
                             <input
                               type="text"
-                              name="name"
-                              id="name"
+                              name="itemname"
+                              id="itemname"
                               value={product.name}
                               onChange={(e) =>
                                 handleInputChange(e.target.name, e.target.value)
                               }
                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                              placeholder="Ex. Apple iMac 27&ldquo;"
+                              placeholder="Enter Item Name"
                             />
                           </div>
                           <div>
                             <label
-                              htmlFor="manufacturer"
+                              htmlFor="itemnumber"
                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                              Manufacturer
+                              Item Number
                             </label>
                             <input
-                              type="text"
-                              name="manufacturer"
-                              id="manufacturer"
-                              value={product.manufacturer}
+                              type="integer"
+                              name="itemnumber"
+                              id="itemnumber"
+                              value={product.itemnumber}
                               onChange={(e) =>
                                 handleInputChange(e.target.name, e.target.value)
                               }
                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                              placeholder="Ex. Apple"
+                              placeholder="Enter Item Serial Number"
                             />
                           </div>
                           {/* <div>
@@ -190,33 +190,140 @@ export default function AddProduct({
                               Ethernet, Magic Mouse 2, Magic Keyboard - US
                             </textarea>
                           </div>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                          {/* <button
-                            type="submit"
-                            className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                          >
-                            Update product
-                          </button> */}
-                          {/* <button
-                            type="button"
-                            className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                          >
-                            <svg
-                              className="mr-1 -ml-1 w-5 h-5"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
+                          <div>
+                            <label
+                              htmlFor="category"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             >
-                              <path
-                                fill-rule="evenodd"
-                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                clip-rule="evenodd"
-                              ></path>
-                            </svg>
-                            Delete
-                          </button> */}
-                        </div>
+                              Category
+                            </label>
+                            <input
+                              type="text"
+                              name="category"
+                              id="category"
+                              value={product.category}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Item Category(e.g.Electronics)"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="quantity"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Quantity
+                            </label>
+                            <input
+                              type="integer"
+                              name="quantity"
+                              id="quantity"
+                              value={product.quantity}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Item Quantity"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="supplier"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Supplier
+                            </label>
+                            <input
+                              type="text"
+                              name="supplier"
+                              id="supplier"
+                              value={product.supplier}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Supplier"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="purchasedate"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Purchase Date
+                            </label>
+                            <input
+                              type="date"
+                              name="purchasedate"
+                              id="purchasedate"
+                              value={product.purchasedate}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Purchase Date"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="expiredate"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Expire Date
+                            </label>
+                            <input
+                              type="date"
+                              name="expiredate"
+                              id="expiredate"
+                              value={product.expiredate}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Expire Date"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="unitprice"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Unit Price
+                            </label>
+                            <input
+                              type="integer"
+                              name="unitprice"
+                              id="unitprice"
+                              value={product.unitprice}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Unit Price"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="totalvalue"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Total Value
+                            </label>
+                            <input
+                              type="integer"
+                              name="totalvalue"
+                              id="totalvalue"
+                              value={product.totalvalue}
+                              onChange={(e) =>
+                                handleInputChange(e.target.name, e.target.value)
+                              }
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                              placeholder="Enter Total Value"
+                            />
+                          </div>
+                        </div>                   
                       </form>
                     </div>
                   </div>

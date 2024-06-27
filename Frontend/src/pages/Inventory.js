@@ -179,7 +179,7 @@ function Inventory() {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 text-xs rounded"
                 onClick={addProductModalSetting}
               >
-                Add Product
+                Add Items
               </button>
             </div>
           </div>
@@ -188,10 +188,11 @@ function Inventory() {
               <tr>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">ItemID</th>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Name</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Item No.</th>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Description</th>
-                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">CategoryID</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Category</th>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Quantity</th>
-                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">SupplierID</th>
+                <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">Supplier</th>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">PurchaseDate</th>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">ExpireDate</th>
                 <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">UnitPrice</th>
@@ -201,11 +202,17 @@ function Inventory() {
             <tbody className="divide-y divide-gray-200">
               {products.map((element, index) => (
                 <tr key={element._id}>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-900">{element.name}</td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.manufacturer}</td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.stock}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-900">{element.id}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.itemname}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.itemnumber}</td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.description}</td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.stock > 0 ? "In Stock" : "Not in Stock"}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.category}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.quantity}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.supplier}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.purchasedate}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.expiredate}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.unitprice}</td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">{element.totalvalue}</td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                     <span className="text-green-700 cursor-pointer" onClick={() => updateProductModalSetting(element)}>Edit</span>
                     <span className="text-red-600 px-2 cursor-pointer" onClick={() => deleteItem(element._id)}>Delete</span>

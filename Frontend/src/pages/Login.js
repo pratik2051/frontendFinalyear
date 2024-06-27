@@ -114,7 +114,7 @@ function Login() {
 
               <div className="text-sm">
                 <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                <Link to="/">Forgot password</Link>
+                <Link to="/forgotpassword">Forgot password</Link>
                 </span>
               </div>
             </div>
@@ -127,9 +127,10 @@ function Login() {
                 Sign in
               </button>
               <p className="mt-2 text-center text-sm text-gray-600">
-                Or{" "}
+                Or
+                Don't have an account?
                 <span className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Don't have an account?{" "}
+                  &nbsp;
                   <Link to="/register">Register now</Link>
                 </span>
               </p>
