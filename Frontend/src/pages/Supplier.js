@@ -12,13 +12,26 @@ function SupplierDetails() {
   const handleUpdate = (supplierId)=>{
 console.log(supplierId,"I'm click")
   }
-  const handledelete = (supplierId)=>{
-    console.log(supplierId,"I'm click")
+  const handleDelete = (supplierId) => {
+    fetch(`http://localhost:8080/api/v1/auth/supplier/deletesupplier/${supplierId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authContext.token}` // Use auth token if needed
       }
-
+    })
+    .then(response => {
+      if (response.ok) {
+        setUpdatePage(!updatePage); // Trigger page update to refresh the list
+      } else {
+        console.error('Failed to delete supplier');
+      }
+    })
+    .catch(err => console.error(err));
+  };
  
 
-  // Fetching Data of All Purchase items
+  // Fetching Data of All Supplieres
   const fetchPurchaseData = () => {
     fetch(`http://localhost:8080/api/v1/auth/supplier/getsuppliers`)
       .then((response) => response.json())

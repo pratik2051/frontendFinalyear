@@ -109,21 +109,21 @@ function Dashboard() {
 
   // Fetching all stores data
   const fetchStoresData = () => {
-    axios.get(`http://localhost:4000/api/store/get/${authContext.user}`)
+    axios.get(`http://localhost:8080/api/v1/auth/purchase-orders/allpurchase}`)
       .then((response) => setStores(response.data))
       .catch((error) => console.error(error));
   };
 
   // Fetching Data of All Products
   const fetchProductsData = () => {
-    axios.get(`http://localhost:4000/api/product/get/${authContext.user}`)
+    axios.get(`http://localhost:8080/api/v1/auth/purchase-orders/allpurchase}`)
       .then((response) => setProducts(response.data))
       .catch((error) => console.error(error));
   };
 
   // Fetching Monthly Sales
   const fetchMonthlySalesData = () => {
-    axios.get('http://localhost:4000/api/sales/getmonthly')
+    axios.get('http://localhost:8080/api/v1/auth/purchase-orders/allpurchase')
       .then((response) => updateChartData(response.data.salesAmount))
       .catch((error) => console.error(error));
   };
